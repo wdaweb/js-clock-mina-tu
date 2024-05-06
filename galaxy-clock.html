@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galaxy Clock</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <script src="js/parallax.js"></script> -->
+    <style>
+      body {
+        margin: 0;
+        background: url(./PIC5.png) no-repeat center center fixed;
+        background-size: cover;
+        box-sizing: 100%;
+        overflow: hidden; /* 隱藏滾動條 */
+        cursor: none;
+        background-attachment: fixed;
+      }
+
+      #clock {
+        width: 500px;
+        height: 500px;
+        margin: auto auto;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(45%, -90%);
+      }
+      #day {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -70%);
+      }
+      #text {
+        text-align: center;
+        font-size: 120px;
+        color: rgb(255, 255, 255);
+        font-family: "Crimson Text", serif;
+        font-weight: 780;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+      }
+      #text2 {
+        text-align: center;
+        font-size: 45px;
+        color: rgb(255, 255, 255);
+        font-family: "Crimson Text", serif;
+        font-weight: 720;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+      }
+
+      #hour {
+        width: 20%;
+        height: 10px;
+        background: rgb(255, 255, 255);
+        position: absolute;
+        left: 30%;
+        top: calc(50% - 5px);
+        border-radius: 5px;
+        transform-origin: right center;
+        box-shadow: 2px 2px 4px rgba(0, 71, 236, 0.5);
+      }
+
+      #minute {
+        width: 40%;
+        height: 9px;
+        background: rgb(255, 255, 255);
+        position: absolute;
+        left: 10%;
+        top: calc(50% - 5px);
+        border-radius: 5px;
+        transform-origin: right center;
+        box-shadow: 2px 2px 4px rgba(0, 71, 236, 0.5);
+      }
+
+      #second {
+        width: 45%;
+        height: 3px;
+        background: rgb(255, 255, 255);
+        position: absolute;
+        left: 5%;
+        top: calc(50% - 2px);
+        border-radius: 5px;
+        transform-origin: right center;
+        box-shadow: 2px 2px 4px rgba(0, 71, 236, 0.5);
+      }
+      #one {
+        position: absolute;
+        bottom: -10%;
+        left: -9%;
+      }
+      #two {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+      }
+      #three {
+        position: absolute;
+        top: -3%;
+        left: -2.5%;
+      }
+
+      #four {
+        position: absolute;
+        top: -1%;
+        left: -6%;
+      }
+
+      #five {
+        position: absolute;
+        bottom: -5%;
+        right: -5%;
+      }
+      #six {
+        position: absolute;
+        top: -44%;
+        right: 28%;
+        animation: rotateImage 30s linear infinite; /* 定義動畫，10秒完成一次，以線性方式無限循環 */
+      }
+      @keyframes rotateImage {
+        from {
+          transform: rotate(0deg); /* 初始角度 */
+        }
+        to {
+          transform: rotate(360deg); /* 結束角度 */
+        }
+      }
+
+      #seven {
+        position: absolute;
+        bottom: -4%;
+        right: -6%;
+        background-size: cover;
+      }
+      #eight {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+      }
+      #myCursor {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: solid 1px #5107fc;
+        position: absolute;
+        transition-duration: 0.1s;
+        box-shadow: 0px 0px 15px 3px rgb(120, 221, 255, 0.9);
+        box-sizing: border-box;
+      }
+      #circle {
+        width: 29px;
+        height: 29px;
+        border-radius: 50%;
+        position: absolute;
+        transition-duration: 0.16s;
+        box-shadow: 0px 0px 10px 7px rgba(120, 221, 255, 04);
+      }
+      /* 流星雨------------------------------------------------------------------------------ */
+      section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        animation: animateBg 3s linear infinite;
+      }
+      @keyframes animatesg {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px 3px rgb(120, 221, 255, 0.7),
+          0px 0px 10px 3px rgba(255, 255, 255, 0.3);
+        animation: animate 5s linear infinite;
+      }
+
+      @keyframes animate {
+        0% {
+          transform: rotate(320deg) translateX(1000px);
+        }
+        100% {
+          transform: rotate(320deg) translateX(-2000px);
+        }
+      }
+      span:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 300px;
+        height: 1px;
+        background: linear-gradient(90deg, #fafcff, transparent);
+      }
+      span:nth-child(1) {
+        top: 50px;
+        right: 0;
+        left: initial;
+        animation-delay: 9s;
+      }
+      span:nth-child(2) {
+        top: 0;
+        right: 120px;
+        left: initial;
+        animation-delay: 5s;
+        animation-duration: 10s;
+      }
+      span:nth-child(3) {
+        top: 0;
+        right: 280px;
+        left: initial;
+        animation-delay: 0.3s;
+        animation-duration: 5s;
+      }
+      span:nth-child(4) {
+        top: 100px;
+        right: 20px;
+        left: initial;
+        animation-delay: 1.3s;
+        animation-duration: 3s;
+      }
+      span:nth-child(5) {
+        top: 200px;
+        left: 1300px;
+        left: initial;
+        animation-delay: 1.3s;
+        animation-duration: 9s;
+      }
+      span:nth-child(6) {
+        top: 0;
+        left: 900px;
+        left: initial;
+        animation-delay: 1s;
+        animation-duration: 2s;
+      }
+      span:nth-child(7) {
+        top: 500px;
+        left: 600px;
+        left: initial;
+        animation-delay: 1.3s;
+        animation-duration: 6s;
+      }
+      span:nth-child(8) {
+        top: 500px;
+        left: 1300px;
+        left: initial;
+        animation-delay: 1.6s;
+        animation-duration: 9s;
+      }
+      span:nth-child(9) {
+        top: 0;
+        left: 1500px;
+        left: initial;
+        animation-delay: 1.3s;
+        animation-duration: 8s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="two"><img src="./pic3.png" /></div>
+    <div id="clock">
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second"></div>
+    </div>
+    <div id="scene">
+      <div id="eight"><img src="./pic11.png" /></div>
+      <div id="seven"><img src="./pic10.png" /></div>
+      <div id="one"><img src="./bdd.png" /></div>
+      <div id="three"><img src="./pic6.png" /></div>
+      <div id="four" data-depth="1"><img src="./pic7.png" /></div>
+      <div id="five"><img src="./pic8.png" /></div>
+      <div id="six"><img src="./pic9.png" /></div>
+    </div>
+    <br />
+    <div id="day">
+      <div id="text">00 : 00 : 00</div>
+      <div id="text2"></div>
+    </div>
+    <!-- 滑鼠------------------------------------------------------------------------- -->
+    <div id="myCursor"></div>
+    <div id="circle"></div>
+    <!-- 流星雨--------------------------------------------------------------------------- -->
+    <section>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </section>
+
+    <script>
+      const elHour = document.getElementById("hour");
+      const elMinute = document.getElementById("minute");
+      const elSecond = document.getElementById("second");
+      const elText = document.getElementById("text");
+      const elText2 = document.getElementById("text2");
+      const clock = () => {
+        const date = new Date();
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const second = date.getSeconds();
+        elHour.style.transform = `rotate(${hour * 30 + 90}deg)`;
+        elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`;
+        elSecond.style.transform = `rotate(${second * 6 + 90}deg)`;
+
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const dayOfWeek = days[date.getDay()];
+
+        const months = [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
+        ];
+        const month = months[date.getMonth()];
+
+        const year = date.getFullYear();
+        elText2.textContent = `${year}.${month}.${date.getDate()}.${dayOfWeek}`;
+
+        elText.textContent = `   ${hour.toString().padStart(2, "0")}:${minute
+          .toString()
+          .padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
+      };
+
+      setInterval(clock, 1000);
+      clock();
+
+      let cursor = document.getElementById("myCursor");
+      let circle = document.getElementById("circle");
+
+      window.addEventListener("mousemove", function (e) {
+        let x = e.clientX;
+        let y = e.clientY;
+        cursor.style.left = x - 27 + "px";
+        cursor.style.top = y - 27 + "px";
+        circle.style.left = x - 17 + "px";
+        circle.style.top = y - 17 + "px";
+      });
+    </script>
+
+    <!-- <script>
+      const scene = document.getElementById("scene");
+      let parallax = new Parallax(scene);
+    </script> -->
+  </body>
+</html>
